@@ -67,8 +67,4 @@
         "*.sln": "*.csproj"
     },
     "dotnet.defaultSolution": "Project Ben Tree.slnx",
-    "java.project.referencedLibraries": [
-        "C:/Program Files/Unity/Hub/Editor/6000.2.6f2/Editor/Data/PlaybackEngines/AndroidPlayer/SDK/platforms/android-36/android.jar",
-        "Assets/Plugins/Android/**/*.jar"
-    ]
 }
