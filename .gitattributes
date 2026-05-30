@@ -1,4 +1,6 @@
-/TextMesh*/ linguist-detectable=false
+Assets/TextMesh*/** linguist-detectable=false
+Assets/TextMesh Pro/** linguist-detectable=false
+
 Assets/Plugins/NativeFilePicker/** linguist-detectable=false
 Assets/Plugins/NativeGallery/** linguist-detectable=false
 *.mm linguist-detectable=false
