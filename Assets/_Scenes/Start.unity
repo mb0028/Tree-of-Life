@@ -9980,22 +9980,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'githublink
-
+  m_text: 'Source: https://github.com/mb0028/Tree-of-Life/
 
     Developer: mb28
 
 
-    --- --- Tree of Life OST (By mb28)
-    --- ---
+    ---
+    --- Tree of Life OST (By mb28) --- ---
 
     Jah (Menu theme)
 
-    World Managing Office (Gamemodes theme)
+    World Managing
+    Office (Gamemodes theme)
 
 
-    All
-    Soundtracks are available on mb28''s YT channel'
+    All Soundtracks are available on mb28''s YT channel'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5607273021bee00449cf3cc34afdafac, type: 2}
   m_sharedMaterial: {fileID: 8009638848111916594, guid: 5607273021bee00449cf3cc34afdafac, type: 2}
@@ -13935,7 +13934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11270bac62c2162429107f12ffb21b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TooltipItem
-  TooltipText: https://drive.google.com/drive/folders/1YMm5lOb8f5gBEW-fPCo4nqLhNHSzHMh2?usp=sharing
+  TooltipText: https://github.com/mb0028/Tree-of-Life/releases
   TextColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1746380722
 GameObject:

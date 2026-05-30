@@ -45,5 +45,5 @@ public class StartButtons : MonoBehaviour
     public void Insta() => Application.OpenURL("https://github.com/mb0028");
     public void X() => Application.OpenURL("https://www.x.com/mb_0028x");
     public void YT() => Application.OpenURL("https://www.youtube.com/mb_0028yt");
-    public void UpdateFromDrive() => Application.OpenURL("");
+    public void UpdateFromDrive() => Application.OpenURL("https://github.com/mb0028/Tree-of-Life/releases");
 }
