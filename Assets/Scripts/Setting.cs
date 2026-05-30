@@ -146,7 +146,6 @@ public class Setting : MonoBehaviour
             FPSButtons[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
         FPSButtons[value].GetComponent<Image>().color = Color.white;
-        FPSButtons[value].GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
 
         Application.targetFrameRate = value switch
         {
