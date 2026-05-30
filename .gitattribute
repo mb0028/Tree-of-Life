@@ -1,3 +1,4 @@
-Assets/TextMesh Pro/** linguist-vendored
-Assets/Plugins/NativeFilePicker/** linguist-vendored
-Assets/Plugins/NativeGallery/** linguist-vendored
+/TextMesh*/ linguist-detectable=false
+Assets/Plugins/NativeFilePicker/** linguist-detectable=false
+Assets/Plugins/NativeGallery/** linguist-detectable=false
+*.mm linguist-detectable=false
