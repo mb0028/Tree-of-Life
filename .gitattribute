@@ -1,7 +1,7 @@
-Assets/TextMesh Pro/** linguist-vendored=false
-Assets/Plugins/NativeFilePicker/** linguist-vendored=false
-Assets/Plugins/NativeGallery/** linguist-vendored=false
+Assets/TextMesh Pro/* linguist-vendored=false
+Assets/Plugins/NativeFilePicker/* linguist-vendored=false
+Assets/Plugins/NativeGallery/* linguist-vendored=false
 
-Assets/TextMesh Pro/** linguist-documentation=false
-Assets/Plugins/NativeFilePicker/** linguist-documentation=false
-Assets/Plugins/NativeGallery/** linguist-documentation=false
+Assets/TextMesh Pro/* linguist-documentation=false
+Assets/Plugins/NativeFilePicker/* linguist-documentation=false
+Assets/Plugins/NativeGallery/* linguist-documentation=false
