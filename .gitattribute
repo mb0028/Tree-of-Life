@@ -1,7 +1,3 @@
-Assets/TextMesh Pro/** llinguist-generated
-Assets/Plugins/NativeFilePicker/** linguist-generated
-Assets/Plugins/NativeGallery/** linguist-generated
-
-Assets/TextMesh Pro/** linguist-generated
-Assets/Plugins/NativeFilePicker/** linguist-generated
-Assets/Plugins/NativeGallery/** linguist-generated
+Assets/TextMesh Pro/** linguist-vendored
+Assets/Plugins/NativeFilePicker/** linguist-vendored
+Assets/Plugins/NativeGallery/** linguist-vendored
