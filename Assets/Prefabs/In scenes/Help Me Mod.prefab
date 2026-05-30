@@ -1036,9 +1036,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "You can change all of theres for custom gamemod:\n\nBackground: mods/CustomGame/world.png
-    (1920x1080)\nTree: mods/CustomGame/tree.png (720x720)\nMusic: mods/CustomGame/bgm.mp3\nLot
-    of settings: /mods/CustomGame/Settings.json\n\nEnemies: \nmods/CustomGame/Enemies/{name}_Enemy.json\nmods/CustomGame/Enemies/{name}_Enemy.png
+  m_text: "You can change all of theres for custom gamemods:\n\nBackground: mods/{gamemodeName}/world.png
+    (1920x1080)\nTree: mods/{gamemodeName}/tree.png (720x720)\nMusic: mods/{gamemodeName}/bgm.mp3\nLot
+    of settings: /mods/{gamemodeName}/Settings.json\n\nEnemies: \nmods/{gamemodeName}/Enemies/{name}_Enemy.json\nmods/{gamemodeName}/Enemies/{name}_Enemy.png
     (720x720)\n---You can add as much as enemy you want---\n\n*Note: Unchnaged texture
     files are using default Black-Purple textures. And at least one enemy is needed"
   m_isRightToLeft: 0
@@ -1912,11 +1912,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "/mods/CustomGame/Enemies/{enemy name}.json\n{\r\n    \"name\": \"Demon\", 
-    // string\r\n    \"minHP\": 1,  // int\r\n    \"maxHPExclusive\": 1,  // int\r\n   
-    \"minSpeed\": 1.0,  // float\r\n    \"maxSpeed\": 1.2,  // float\r\n    \"minScale\":
-    0.81,  // float\r\n    \"maxScale\": 1.1,  // float\r\n    \"atkPower\": 1  //
-    float\r\n}\n*Note: REMOVE ALL COMMENTS (//) OR GAME WILL BE BREAKS"
+  m_text: "/mods/{gamemodeName}/Enemies/{enemy name}_Enemy.json\n{\r\n    \"name\":
+    \"Demon\",  // string\r\n    \"minHP\": 1,  // int\r\n    \"maxHPExclusive\":
+    1,  // int\r\n    \"minSpeed\": 1.0,  // float\r\n    \"maxSpeed\": 1.2,  //
+    float\r\n    \"minScale\": 0.81,  // float\r\n    \"maxScale\": 1.1,  // float\r\n   
+    \"atkPower\": 1  // float\r\n}\n*Note: REMOVE ALL COMMENTS (//) OR GAME WILL
+    BE BREAKS"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5607273021bee00449cf3cc34afdafac, type: 2}
   m_sharedMaterial: {fileID: 8009638848111916594, guid: 5607273021bee00449cf3cc34afdafac, type: 2}
@@ -3024,7 +3025,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "/mods/CustomGame/Settings.json\n{\r\n    \"treeHP\": 8,  // int\r\n   
+  m_text: "/mods/{gamemodeName}/Settings.json\n{\r\n    \"treeHP\": 8,  // int\r\n   
     \"cameraBGColor\": {  // Color behind camera - Vector4 float\r\n        \"r\":
     1,\r\n        \"g\": 0.8,\r\n        \"b\": 0.5,\r\n        \"a\": 1.0\r\n   
     },\r\n    \"cameraZoom\": 8.0,  // recommend 5..10 - float\r\n    \"showClouds\":
