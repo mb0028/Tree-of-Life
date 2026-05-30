@@ -1038,7 +1038,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "You can change all of theres for custom gamemods:\n\nBackground: mods/{gamemodeName}/world.png
     (1920x1080)\nTree: mods/{gamemodeName}/tree.png (720x720)\nMusic: mods/{gamemodeName}/bgm.mp3\nLot
-    of settings: /mods/{gamemodeName}/Settings.json\n\nEnemies: \nmods/{gamemodeName}/Enemies/{name}_Enemy.json\nmods/{gamemodeName}/Enemies/{name}_Enemy.png
+    of settings: /mods/{gamemodeName}/manifest.json\n\nEnemies: \nmods/{gamemodeName}/Enemies/{name}_Enemy.json\nmods/{gamemodeName}/Enemies/{name}_Enemy.png
     (720x720)\n---You can add as much as enemy you want---\n\n*Note: Unchnaged texture
     files are using default Black-Purple textures. And at least one enemy is needed"
   m_isRightToLeft: 0
