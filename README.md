@@ -3,16 +3,16 @@ Simple, open source game about protecting tree with clicking or dragging on scre
 Available for Windows & Android (+Android TV but needs mouse to play)
 
 - Rhythm based gamemode with ability to select mp3 track file
-- Modding! You can make custom gamemodes. How? [Download example]() or see in-game documentation.
+- Modding! You can make custom gamemodes. How? [Download example](Dungeon%20DLC%20(Modding%20Template).7z) or see in-game documentation.
 
 ## Other
 
 Original Soundtracks:
-- Jah (Menu theme) [(YT)]()
-- World Managing Office (Gamemodes theme) [(YT)]()
+- Jah (Menu theme) [(YT)]() [(File)](/Assets/Sounds/Jah.mp3)
+- World Managing Office (Gamemodes theme) [(YT)]() [(File)](/Assets/Sounds/World%20Managing%20Office.mp3)
 
 App Fonts: 
 - [LexendDeca](https://github.com/googlefonts/lexend)
 - [Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP)
 
-[Chnagelog](https://github.com/mb0028/Tree-of-Life/blob/main/Assets/StreamingAssets/Changelog.txt)
+[Chnagelog](/Assets/StreamingAssets/Changelog.txt)
