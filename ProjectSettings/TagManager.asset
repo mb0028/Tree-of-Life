@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - tree
+  - mouse
+  - vedal
+  - ButtonsSound
+  - PauseableMusic
+  - Arrow
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - MiniMap
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: BG
+    uniqueID: 22453835
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Entities
+    uniqueID: 1482388027
+    locked: 0
+  - name: Blur
+    uniqueID: 2758957653
+    locked: 0
+  - name: UI
+    uniqueID: 2174860501
+    locked: 0
+  - name: Particles
+    uniqueID: 3759916749
+    locked: 0
+  m_RenderingLayers:
+  - Default

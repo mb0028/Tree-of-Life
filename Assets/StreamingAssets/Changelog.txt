@@ -1,0 +1,4 @@
+
+v2.0.0
++ Remake game completely. Tree Of Life is now open source and available on github.
++ Remove old changelogs

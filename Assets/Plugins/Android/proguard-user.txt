@@ -1,0 +1,1 @@
+-keep class com.mb28.treeoflife.MBJava.** { *; }
