@@ -14,5 +14,9 @@ Original Soundtracks:
 App Fonts: 
 - [LexendDeca](https://github.com/googlefonts/lexend)
 - [Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP)
+  
+Android permissions note:
+- MANAGE_EXTERNAL_STORAGE: Needed for modding. Also for reading audio files because I'm too lazy to add audio permission separately.
+
 
 [Chnagelog](/Assets/StreamingAssets/Changelog.txt)
