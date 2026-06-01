@@ -23,13 +23,8 @@ public class ScreenshotTaker : MonoBehaviour
         }
         else if (Application.platform == RuntimePlatform.Android)
         {
-            Texture2D screenshotTexture = ScreenCapture.CaptureScreenshotAsTexture();
-            byte[] bytes = screenshotTexture.EncodeToPNG();
-            Destroy(screenshotTexture);
-        
-            string albumName = "Tree of Life";
-            TreeNotification.ScreenshotNotif($"Screenshot Saved\n0/DCIM/Tree of Life/{fileName}");
-            NativeGallery.SaveImageToGallery(bytes, albumName, fileName, null);
+            TreeNotification.ScreenshotNotif($"Screenshot Saved\nInternal storage/DCIM/Tree of Life/{fileName}");
+            NativeGallery.SaveImageToGallery(ScreenCapture.CaptureScreenshotAsTexture().EncodeToPNG(), "Tree of Life", fileName, null);
         }
         
         yield break;
