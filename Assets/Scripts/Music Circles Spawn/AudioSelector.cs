@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using MB28.Music;
 using TagLib.Id3v2;
@@ -14,7 +15,7 @@ public class AudioSelector : MonoBehaviour
     public Image cover;
     public TextMeshProUGUI currentPathTMP;
     public AudioSource source;
-    
+
     public static AudioClip clip;
     public static float trackDuration;
     public static string trackDurationText;
@@ -48,7 +49,7 @@ public class AudioSelector : MonoBehaviour
     }
     private readonly List<string> tracksPaths = new();
 
-    
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -57,7 +58,7 @@ public class AudioSelector : MonoBehaviour
             ChangeSelectedAudioPath = Setting.settingsData.music_lastTrackPath;
             LoadTags();
         }
-            
+
 
         Task.Run(LoadTracks);
     }
@@ -93,8 +94,8 @@ public class AudioSelector : MonoBehaviour
         if (string.IsNullOrWhiteSpace(selectedAudioPath) || !File.Exists(selectedAudioPath))
             return;
 
-        DownloadHandlerAudioClip downloader = new($"File://{selectedAudioPath}", AudioType.MPEG)
-        {
+        DownloadHandlerAudioClip downloader = new($"File://{selectedAudioPath}",
+        Path.GetExtension(selectedAudioPath) == ".mp3" ? AudioType.MPEG : AudioType.ACC)  {
             streamAudio = true
         };
         UnityWebRequest web = new($"File://{selectedAudioPath}", "GET", downloader, null);
@@ -111,14 +112,17 @@ public class AudioSelector : MonoBehaviour
     private static void LoadTags()
     {
         var tags = TagLib.File.Create(selectedAudioPath);
-        trackName = $"{tags.Tag.Title}\n{tags.Tag.Composers[0]} • {tags.Tag.Performers[0]} • {tags.Tag.Genres[0]} • {tags.Tag.Year}";
+        trackName = $"{tags.Tag.Title}\n{tags.Tag.Composers.FirstOrDefault()} • {tags.Tag.Performers.FirstOrDefault()} • {tags.Tag.Genres.FirstOrDefault()} • {tags.Tag.Year}";
         MusicCircleSpawner.Instance.LogText.text = trackName;
-
-        Texture2D img = new(2, 2);
-        byte[] bytes = new byte[tags.Tag.Pictures[0].Data.Count];
-        tags.Tag.Pictures[0].Data.CopyTo(bytes, 0);
-        img.LoadImage(bytes);
-        Instance.cover.sprite = Sprite.Create(img, new(0, 0, img.width, img.height), new(0.5f, 0.5f));
+        try {
+            Texture2D img = new(2, 2);
+            byte[] bytes = new byte[tags.Tag.Pictures[0].Data.Count];
+            tags.Tag.Pictures[0].Data.CopyTo(bytes, 0);
+            img.LoadImage(bytes);
+            Instance.cover.sprite = Sprite.Create(img, new(0, 0, img.width, img.height), new(0.5f, 0.5f));
+        }
+        catch (System.Exception) { Instance.cover.sprite = null; }
+        
         tags.Dispose();
     }
 
@@ -126,12 +130,14 @@ public class AudioSelector : MonoBehaviour
     {
         var d = CommonMusicDirs();
         for (int i = 0; i < d.Length; i++)
+        {
             foreach (var item in Directory.GetFiles(d[i], "*.mp3", SearchOption.AllDirectories))
                 tracksPaths.Add(item);
+        }
         canPlay = true;
         return Task.CompletedTask;
     }
-    
+
     private string[] CommonMusicDirs()
     {
         var t = new List<string>();
@@ -147,4 +153,5 @@ public class AudioSelector : MonoBehaviour
         }
         return t.ToArray();
     }
+
 }

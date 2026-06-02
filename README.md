@@ -17,6 +17,7 @@ App Fonts:
   
 Android permissions note:
 - MANAGE_EXTERNAL_STORAGE: Needed for modding. Also for reading audio files because I'm too lazy to add audio permission separately.
+- Microphone (optional): For live audio record
 
 
 [Chnagelog](/Assets/StreamingAssets/Changelog.txt)
