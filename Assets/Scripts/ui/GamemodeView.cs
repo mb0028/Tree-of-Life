@@ -13,11 +13,9 @@ public class GamemodeView : MonoBehaviour
         using AndroidJavaClass mbJava = new("com.mb28.treeoflife.MBJava");
         if (mbJava.CallStatic<bool>("canManageMedia") == false)
         {
-            using (var activity = AndroidApplication.currentActivity)
-            {
-                mbJava.CallStatic("ShowToast", activity, "Tree of Life needs all files access for modding and reading audio files");
-                mbJava.CallStatic("GoToAllFilesAccess", activity);
-            }
+            var activity = AndroidApplication.currentActivity;
+            //mbJava.CallStatic("ShowToast", activity, "Tree of Life needs all files access for modding and reading audio files");
+            mbJava.CallStatic("GoToAllFilesAccess", activity);
             Application.Quit();
             return;
         }

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 
 public class MBJava {
@@ -27,8 +28,8 @@ public class MBJava {
     }
 
     public static void GoToAllFilesAccess(Activity activity) {
-        if (canManageMedia() == false) {
-            Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !canManageMedia()) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
             intent.setData(Uri.fromParts("package", activity.getPackageName(), null));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             activity.startActivity(intent);

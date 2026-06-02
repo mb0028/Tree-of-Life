@@ -17,12 +17,13 @@ public class DebugUI : MonoBehaviour
 
     void Update()
     {
-        if (this.gameObject.activeInHierarchy == false) { return; }
+        if (gameObject.activeInHierarchy == false)
+            return;
+            
         debugText.text = ThisScene switch
         {
-            2 => "Gamemode: " + GMsName.MusicSpawn + "\n"
-                    + AllBands()
-                    + $"Current Bands in use: 1, 2, 4, 6\nTarget Spawnrate (Red): {MusicCircleSpawner.Instance.BandTrargetToSpawn}",
+            1 => "Gamemode: " + GMsName.MusicSpawn + "\n" + AllBands()
+                + $"Current Bands in use: 1, 2, 4, 6\nTarget Spawnrate (Red): {MusicCircleSpawner.Instance.BandTrargetToSpawn}",
             _ => $"Scene / Gamemode: {SceneManager.GetActiveScene().name}\n{GlobalDebugTexts}"
         };
     }

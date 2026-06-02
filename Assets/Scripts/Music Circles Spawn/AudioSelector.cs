@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class AudioSelector : MonoBehaviour
 {
+    public static AudioSelector Instance;
     public Image cover;
     public TextMeshProUGUI currentPathTMP;
     public AudioSource source;
@@ -50,8 +51,13 @@ public class AudioSelector : MonoBehaviour
     
     void Awake()
     {
+        if (Instance == null) Instance = this;
         if (!string.IsNullOrWhiteSpace(Setting.settingsData.music_lastTrackPath))
+        {
             ChangeSelectedAudioPath = Setting.settingsData.music_lastTrackPath;
+            LoadTags();
+        }
+            
 
         Task.Run(LoadTracks);
     }
@@ -59,13 +65,16 @@ public class AudioSelector : MonoBehaviour
     public void SelectRandomAudio()
     {
         if (canPlay)
-            SelectAudio(Random.Range(0, tracksPaths.Count));
+            SelectAudio(Random.Range(0, tracksPaths.Count - 1));
     }
 
     public void SelectAudio(int tracksPathsIndex)
     {
         if (canPlay)
+        {
             ChangeSelectedAudioPath = tracksPaths[tracksPathsIndex];
+            LoadTags();
+        }
     }
 
     public void PickAudio()
@@ -74,6 +83,7 @@ public class AudioSelector : MonoBehaviour
             NativeFilePicker.PickFile(async i =>
             {
                 ChangeSelectedAudioPath = i;
+                LoadTags();
                 await ReadyTrack();
             }, "mp3");
     }
@@ -82,19 +92,11 @@ public class AudioSelector : MonoBehaviour
     {
         if (string.IsNullOrWhiteSpace(selectedAudioPath) || !File.Exists(selectedAudioPath))
             return;
-        try
-        {
-            Tag frames = new(new TagLib.Mpeg.File(selectedAudioPath), 0, TagLib.ReadStyle.PictureLazy);
-            trackName = $"{frames.Performers[0]} • {frames.Title} • {frames.Year}";
-            
-            Texture2D texture = new(2, 2);
-            byte[] bytes = new byte[frames.Pictures[0].Data.Count];
-            frames.Pictures[0].Data.CopyTo(bytes, 0);
-            texture.LoadImage(bytes);
-        }
-        catch (System.Exception) { }
 
-        DownloadHandlerAudioClip downloader = new($"File://{selectedAudioPath}", AudioType.MPEG) { streamAudio = true };
+        DownloadHandlerAudioClip downloader = new($"File://{selectedAudioPath}", AudioType.MPEG)
+        {
+            streamAudio = true
+        };
         UnityWebRequest web = new($"File://{selectedAudioPath}", "GET", downloader, null);
 
         await web.SendWebRequest();
@@ -104,6 +106,20 @@ public class AudioSelector : MonoBehaviour
         trackDuration = clip.length;
         System.TimeSpan t = System.TimeSpan.FromSeconds(trackDuration);
         trackDurationText = string.Format("{0}:{1:D2}", (int)t.TotalMinutes, t.Seconds);
+    }
+
+    private static void LoadTags()
+    {
+        var tags = TagLib.File.Create(selectedAudioPath);
+        trackName = $"{tags.Tag.Title}\n{tags.Tag.Composers[0]} • {tags.Tag.Performers[0]} • {tags.Tag.Genres[0]} • {tags.Tag.Year}";
+        MusicCircleSpawner.Instance.LogText.text = trackName;
+
+        Texture2D img = new(2, 2);
+        byte[] bytes = new byte[tags.Tag.Pictures[0].Data.Count];
+        tags.Tag.Pictures[0].Data.CopyTo(bytes, 0);
+        img.LoadImage(bytes);
+        Instance.cover.sprite = Sprite.Create(img, new(0, 0, img.width, img.height), new(0.5f, 0.5f));
+        tags.Dispose();
     }
 
     public Task LoadTracks()
