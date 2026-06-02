@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,9 +16,11 @@ public class GamemodeCard : MonoBehaviour
     void Start()
     {
         GetComponent<Button>().onClick.RemoveAllListeners();
-        GetComponent<Button>().onClick.AddListener(() => {
-            SceneManager.LoadScene(sceneIndex);
+        GetComponent<Button>().onClick.AddListener(async () => {
             CustomGameLoader.gamemodeToLoad = modName;
+            CircleTransi.Instance.In();
+            await Task.Delay(1000);
+            await SceneManager.LoadSceneAsync(sceneIndex);
         });
         
         GetComponentInChildren<TextMeshProUGUI>().text = displayName;

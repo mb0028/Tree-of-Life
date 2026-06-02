@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class EndGameScore : MonoBehaviour
 {
     private TextMeshProUGUI scoreEndText;
-    public TextMeshProUGUI endlessExtraEndText;
-    public GameObject endlessCardsScrollbar;
 
     private Volume volume;
     private DepthOfField depthOfField;
@@ -17,7 +15,6 @@ public class EndGameScore : MonoBehaviour
     void Awake()
     {
         thisScene = SceneManager.GetActiveScene().buildIndex;
-        if (thisScene == 1) endlessCardsScrollbar.SetActive(true);
         scoreEndText = GetComponent<TextMeshProUGUI>();    
         volume = FindFirstObjectByType<Volume>();
         if (volume != null) volume.profile.TryGet(out depthOfField);

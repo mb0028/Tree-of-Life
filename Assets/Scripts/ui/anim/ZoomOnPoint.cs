@@ -37,5 +37,10 @@ public class ZoomOnPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         transform.localScale = startScale;
     }
-    private void PlaySFX() => PauseTheGame.clickSFX.PlayOneShot(PauseTheGame.clickSFX.clip);
+    private void PlaySFX()
+    {
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+            return;
+        PauseTheGame.clickSFX.PlayOneShot(PauseTheGame.clickSFX.clip);
+    }
 }

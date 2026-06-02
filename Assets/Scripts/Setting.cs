@@ -30,7 +30,7 @@ public class Setting : MonoBehaviour
 
     private Tonemapping tonemapping;
     private Bloom bloom;
-    public static string SettingsPath => $"{Application.persistentDataPath}/Settings/_Settings.json";
+    public static string SettingsPath => $"{Application.persistentDataPath}/settings.json";
 
     void Awake()
     {
@@ -52,6 +52,8 @@ public class Setting : MonoBehaviour
 
         if (File.Exists(SettingsPath))
             JsonConvert.PopulateObject(File.ReadAllText(SettingsPath), settingsData);
+        else
+            SaveSettings();
         
         RenderScale(settingsData.renderScaleLevel);
         ShowClouds(settingsData.showClouds);
@@ -146,7 +148,6 @@ public class Setting : MonoBehaviour
             FPSButtons[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
         FPSButtons[value].GetComponent<Image>().color = Color.white;
-        FPSButtons[value].GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
 
         Application.targetFrameRate = value switch
         {
@@ -159,12 +160,17 @@ public class Setting : MonoBehaviour
         SaveSettings();
     }
 
-
     private void ChangeBloom()
     {
         float bloomValue = tonemapping.mode.value == TonemappingMode.None ? 0.5f : 1.25f;
         float bloomIntensity = settingsData.effectsLevel >= 2 ? bloomValue : 0;
         bloom.intensity.value = bloomIntensity;
+    }
+
+    public void OpenMES()
+    {
+        using AndroidJavaClass mbJava = new("com.mb28.treeoflife.MBJava");
+        mbJava.CallStatic("GoToAllFilesAccess", UnityEngine.Android.AndroidApplication.currentActivity);
     }
 
     public static void SaveSettings() => File.WriteAllText(SettingsPath, JsonConvert.SerializeObject(settingsData));

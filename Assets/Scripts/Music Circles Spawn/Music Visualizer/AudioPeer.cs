@@ -33,34 +33,25 @@ public class AudioPeer : MonoBehaviour
 
     void Update()
     {
-        GetSpectrumAudioSource();
+        if (!MusicCircleSpawner.Instance.IsStarted)
+            return;
+
+        audioSource.GetSpectrumData(samples, 0, FFTWindow.Blackman);
         MakeFrequencyBands();
         BandBuffer();
         CreateAudioBands();
     }
-
-
-
 
     void CreateAudioBands()
     {
         for (int i = 0; i < 8; i++)
         {
             if (freeqBand[i] > freeqBandHighest[i])
-            {
                 freeqBandHighest[i] = freeqBand[i];
-            }
-
-            audioBand[i] = (freeqBand[i] / freeqBandHighest[i]);
-            audioBandBuffer[i] = (bandBuffer[i] / freeqBandHighest[i]);
-
+            
+            audioBand[i] = freeqBand[i] / freeqBandHighest[i];
+            audioBandBuffer[i] = bandBuffer[i] / freeqBandHighest[i];
         }
-    }
-
-
-    void GetSpectrumAudioSource()
-    {
-        audioSource.GetSpectrumData(samples, 0, FFTWindow.Blackman);
     }
 
     void BandBuffer()
@@ -87,7 +78,6 @@ public class AudioPeer : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-
             float average = 0;
             int sampleCount = (int)Mathf.Pow(2, i) * 2;
 
@@ -102,16 +92,8 @@ public class AudioPeer : MonoBehaviour
             }
 
             average /= count;
-
             freeqBand[i] = average * 10;
-
-
-
         }
     }
-
-
-
-
 
 }

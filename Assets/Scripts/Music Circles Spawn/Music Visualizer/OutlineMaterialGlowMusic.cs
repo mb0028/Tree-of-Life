@@ -13,28 +13,19 @@ public class OutlineMaterialGlowMusic : MonoBehaviour
         imageMat = GetComponent<Image>().material;
         if (Application.platform == RuntimePlatform.Android && PauseTheGame.Instance.isTVPlatform == false)
         {
-            try
-            {
-                using AndroidJavaClass mbJava = new("com.mb28.treeoflife.MBJava");
-                roundnessAndroid = mbJava.CallStatic<int>("cornerRadius", AndroidApplication.currentActivity);
-                imageMat.SetFloat("_Roundness", Mathf.Clamp(Mathf.InverseLerp(0, 150, roundnessAndroid) * 0.05f, 0, 200));
-            }
-            catch (System.Exception e)
-            {
-                TreeNotification.Unregistered("ERROR", 3);
-                GUIUtility.systemCopyBuffer = e.ToString();
-                imageMat.SetFloat("_Roundness", 0f);
-            }
+            using AndroidJavaClass mbJava = new("com.mb28.treeoflife.MBJava");
+            roundnessAndroid = mbJava.CallStatic<int>("cornerRadius", AndroidApplication.currentActivity);
+            imageMat.SetFloat("_Roundness", Mathf.Clamp(Mathf.InverseLerp(0, 150, roundnessAndroid) * 0.05f, 0, 200));
         }
         else
             imageMat.SetFloat("_Roundness", 0f);
+
+        imageMat.SetFloat("_Alpha", 0);
     }
 
     void Update()
     {
         if (MusicCircleSpawner.Instance.IsStarted)
-            imageMat.SetFloat("_Alpha", Mathf.Clamp01(AudioPeer.audioBandBuffer[3] - 0.3f));
-        else
-            imageMat.SetFloat("_Alpha", 0);
+            imageMat.SetFloat("_Alpha", Mathf.Clamp01(AudioPeer.audioBandBuffer[3] - 0.3f));            
     }
 }

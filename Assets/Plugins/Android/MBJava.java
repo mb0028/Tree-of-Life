@@ -3,6 +3,10 @@ import android.view.RoundedCorner;
 import android.view.WindowInsets;
 import android.app.Activity;
 import android.os.Build;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 
 public class MBJava {
 
@@ -19,9 +23,21 @@ public class MBJava {
         return 0;
     }
 
-    public static void ShowToast(Activity activity, String msg) {
+    public static boolean canManageMedia() {
+        return android.os.Environment.isExternalStorageManager();
     }
 
-    
+    public static void GoToAllFilesAccess(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !canManageMedia()) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+            intent.setData(Uri.fromParts("package", activity.getPackageName(), null));
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(intent);
+        }
+    }
+
+    public static void ShowToast(Activity activity, String msg) {
+        android.widget.Toast.makeText(activity, msg, 0);
+    }
 
 }

@@ -9,7 +9,7 @@ public class MBManifestTagger : IPostGenerateGradleAndroidProject
 
     public void OnPostGenerateGradleAndroidProject(string path)
     {
-        AddAccess(path, "android.permission.MANAGE_EXTRENAL_STORAGE");
+        AddAccess(path, "android.permission.MANAGE_EXTERNAL_STORAGE");
     }
     
     private void AddAccess(string path, string androidAccess)

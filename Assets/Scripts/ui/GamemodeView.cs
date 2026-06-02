@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class GamemodeView : MonoBehaviour
 {
@@ -9,17 +10,32 @@ public class GamemodeView : MonoBehaviour
 
     async void Awake()
     {
-        string[] mods = Directory.GetDirectories($"{CustomGameLoader.ModsPath}");
-        foreach (var modDir in mods)
+        using AndroidJavaClass mbJava = new("com.mb28.treeoflife.MBJava");
+        if (mbJava.CallStatic<bool>("canManageMedia") == false)
         {
-            GameObject dgDLC = Instantiate(cardTemp, cardsList);
-            var info = dgDLC.GetComponent<GamemodeCard>();
-            info.displayName = $"{Path.GetFileName(modDir)} (Mod)";
-            info.fadeColor = Color.brown;
-            info.banner = await GetSpriteNull($"{modDir}/cover.png");
-            info.sceneIndex = 2;
-            info.modName = Path.GetFileName(modDir);
-            dgDLC.GetComponent<TooltipItem>().TooltipText = File.ReadAllText($"{modDir}/info.txt");
+            var activity = AndroidApplication.currentActivity;
+            //mbJava.CallStatic("ShowToast", activity, "Tree of Life needs all files access for modding and reading audio files");
+            mbJava.CallStatic("GoToAllFilesAccess", activity);
+            Application.Quit();
+            return;
+        }
+
+        try {
+            string[] mods = Directory.GetDirectories($"{CustomGameLoader.ModsPath}");
+            foreach (var modDir in mods)
+            {
+                GameObject dgDLC = Instantiate(cardTemp, cardsList);
+                var info = dgDLC.GetComponent<GamemodeCard>();
+                info.displayName = $"{Path.GetFileName(modDir)} (Mod)";
+                info.fadeColor = Color.brown;
+                info.banner = await GetSpriteNull($"{modDir}/cover.png");
+                info.sceneIndex = 2;
+                info.modName = Path.GetFileName(modDir);
+                dgDLC.GetComponent<TooltipItem>().TooltipText = File.ReadAllText($"{modDir}/info.txt");
+            }
+        }
+        catch (System.Exception)
+        {
         }
     }
     
