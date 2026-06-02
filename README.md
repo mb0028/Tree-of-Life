@@ -8,8 +8,8 @@ Available for Windows & Android (+Android TV but needs mouse to play)
 ## Other
 
 Original Soundtracks:
-- Jah (Menu theme) [(YT)]() [(File)](/Assets/Sounds/Jah.mp3)
-- World Managing Office (Gamemodes theme) [(YT)]() [(File)](/Assets/Sounds/World%20Managing%20Office.mp3)
+- Jah (Menu theme) [(YT)](https://youtube.com/shorts/ghXIXqSL-Kw?si=PYmetvxISI5bgY2H) [(File)](/Assets/Sounds/Jah.mp3)
+- World Managing Office (Gamemodes theme) [(YT)](https://youtube.com/shorts/lp64Y5hMe6s?si=MNuQEXiFiUAG6USt) [(File)](/Assets/Sounds/World%20Managing%20Office.mp3)
 
 App Fonts: 
 - [LexendDeca](https://github.com/googlefonts/lexend)
