@@ -5,8 +5,8 @@ public class ZoomOnPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     public float zoomSizeMultiply = 1.1f;
     public float duration = 0.3f;
-
     private Vector3 startScale;
+
     void Start()
     {
         if (transform != null)
@@ -18,25 +18,26 @@ public class ZoomOnPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.localScale = startScale * zoomSizeMultiply;
+        transform.ScaleTo(startScale * zoomSizeMultiply, duration, EaseMode.EaseOutBack).Unscaled();
         PlaySFX();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.localScale = startScale;
+        transform.ScaleTo(startScale, duration, EaseMode.EaseOutBack).Unscaled();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        transform.localScale = startScale * 0.9f;
+        transform.ScaleTo(startScale * 0.9f, duration, EaseMode.EaseOutBack).Unscaled();
         PlaySFX();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        transform.localScale = startScale;
+        transform.ScaleTo(startScale, duration, EaseMode.EaseOutBack).Unscaled();
     }
+
     private void PlaySFX()
     {
         if (Application.platform == RuntimePlatform.WindowsEditor)

@@ -80,50 +80,61 @@ public class AudioSelector : MonoBehaviour
 
     public void PickAudio()
     {
-        if (canPlay)
-            NativeFilePicker.PickFile(async i =>
-            {
-                ChangeSelectedAudioPath = i;
-                LoadTags();
-                await ReadyTrack();
-            }, "mp3");
+        try {
+            if (canPlay)
+                NativeFilePicker.PickFile(async i =>
+                {
+                    ChangeSelectedAudioPath = i;
+                    LoadTags();
+                    await ReadyTrack();
+                }, "audio/MPEG");
+        }
+        catch (System.Exception e) { Debug.Log(e); }
     }
 
     public static async Task ReadyTrack()
     {
-        if (string.IsNullOrWhiteSpace(selectedAudioPath) || !File.Exists(selectedAudioPath))
-            return;
+       try
+       {
+            if (string.IsNullOrWhiteSpace(selectedAudioPath) || !File.Exists(selectedAudioPath))
+                return;
 
-        DownloadHandlerAudioClip downloader = new($"File://{selectedAudioPath}",
-        Path.GetExtension(selectedAudioPath) == ".mp3" ? AudioType.MPEG : AudioType.ACC)  {
-            streamAudio = true
-        };
-        UnityWebRequest web = new($"File://{selectedAudioPath}", "GET", downloader, null);
+            DownloadHandlerAudioClip downloader = new($"File://{selectedAudioPath}",
+            Path.GetExtension(selectedAudioPath) == ".mp3" ? AudioType.MPEG : AudioType.ACC)  {
+                streamAudio = true
+            };
+            UnityWebRequest web = new($"File://{selectedAudioPath}", "GET", downloader, null);
 
-        await web.SendWebRequest();
-        clip = DownloadHandlerAudioClip.GetContent(web);
-        web.Dispose();
+            await web.SendWebRequest();
+            clip = DownloadHandlerAudioClip.GetContent(web);
+            web.Dispose();
 
-        trackDuration = clip.length;
-        System.TimeSpan t = System.TimeSpan.FromSeconds(trackDuration);
-        trackDurationText = string.Format("{0}:{1:D2}", (int)t.TotalMinutes, t.Seconds);
+            trackDuration = clip.length;
+            System.TimeSpan t = System.TimeSpan.FromSeconds(trackDuration);
+            trackDurationText = string.Format("{0}:{1:D2}", (int)t.TotalMinutes, t.Seconds);
+       }
+       catch (System.Exception e) { Debug.Log(e); }
     }
 
     private static void LoadTags()
     {
-        var tags = TagLib.File.Create(selectedAudioPath);
-        trackName = $"{tags.Tag.Title}\n{tags.Tag.Composers.FirstOrDefault()} • {tags.Tag.Performers.FirstOrDefault()} • {tags.Tag.Genres.FirstOrDefault()} • {tags.Tag.Year}";
-        MusicCircleSpawner.Instance.LogText.text = trackName;
-        try {
-            Texture2D img = new(2, 2);
-            byte[] bytes = new byte[tags.Tag.Pictures[0].Data.Count];
-            tags.Tag.Pictures[0].Data.CopyTo(bytes, 0);
-            img.LoadImage(bytes);
-            Instance.cover.sprite = Sprite.Create(img, new(0, 0, img.width, img.height), new(0.5f, 0.5f));
+        try
+        {
+            var tags = TagLib.File.Create(selectedAudioPath);
+            trackName = $"{tags.Tag.Title}\n{tags.Tag.Composers.FirstOrDefault()} • {tags.Tag.Performers.FirstOrDefault()} • {tags.Tag.Genres.FirstOrDefault()} • {tags.Tag.Year}";
+            MusicCircleSpawner.Instance.LogText.text = trackName;
+            try {
+                Texture2D img = new(2, 2);
+                byte[] bytes = new byte[tags.Tag.Pictures[0].Data.Count];
+                tags.Tag.Pictures[0].Data.CopyTo(bytes, 0);
+                img.LoadImage(bytes);
+                Instance.cover.sprite = Sprite.Create(img, new(0, 0, img.width, img.height), new(0.5f, 0.5f));
+            }
+            catch (System.Exception) { Instance.cover.sprite = null; }
+            
+            tags.Dispose();
         }
-        catch (System.Exception) { Instance.cover.sprite = null; }
-        
-        tags.Dispose();
+        catch (System.Exception e) { Debug.Log(e); }
     }
 
     public Task LoadTracks()

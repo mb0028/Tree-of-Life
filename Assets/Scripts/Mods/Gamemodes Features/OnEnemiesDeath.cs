@@ -8,11 +8,9 @@ public class OnEnemiesDeath : MonoBehaviour
     public async void OnDeath(CGMEnemies e)
     {
         Destroy(e);
-        GameObject p = Instantiate(deathParticle.gameObject);
-        p.GetComponent<ParticleSystem>().Play();
-
-        //await Task.Delay(600);
-        Destroy(p);
+        deathParticle.Play();
+        gameObject.transform.ScaleTo(Vector3.zero, 0.6f);
+        await Task.Delay(600);
         Destroy(gameObject);
     }
 }

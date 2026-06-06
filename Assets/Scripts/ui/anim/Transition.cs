@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,9 @@ public class CircleTransi : MonoBehaviour
     public Material m;
     public CanvasGroup c;
     public Vector3 startT;
+
+    private readonly int borderID = Shader.PropertyToID("_Border");
+    private readonly int insideID = Shader.PropertyToID("_Inside");
 
     void Awake()
     {
@@ -23,29 +27,32 @@ public class CircleTransi : MonoBehaviour
         AnimOut();
     }
 
+    // Transition are inspired by website TODO: ADD WEB URL
     public async void In()
     {
         Vector2 currentMousePosition = Vector2.zero;
-        if (Touchscreen.current != null) {
+        if (Touchscreen.current != null)
+        {
             currentMousePosition = Touchscreen.current.primaryTouch.position.value;
         }
-        else if (Mouse.current != null) {
+        else if (Mouse.current != null)
+        {
             currentMousePosition = Mouse.current.position.value;
         }
         transform.position = currentMousePosition;
 
         c.blocksRaycasts = true;
-        // m.DOFloat(1f, "_Border", 0.6f);
-        // await Task.Delay(400);
-        // m.DOFloat(1f, "_Inside", 0.6f);
+        m.FloatTo01(borderID, 1f, 0.6f);
+        await Task.Delay(400);
+        m.FloatTo01(insideID, 1f, 0.6f);
     }
 
     public void AnimOut()
     {
         transform.position = startT;
         c.blocksRaycasts = false;
-        // m.DOFloat(0f, "_Border", 0.4f);
-        // m.DOFloat(0f, "_Inside", 0.4f);
+        m.FloatTo01(borderID, 0f, 0.4f);
+        m.FloatTo01(insideID, 0f, 0.3f);
     }
    
 }

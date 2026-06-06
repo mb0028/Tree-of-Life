@@ -16,7 +16,8 @@ public class PauseTheGame : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); } else { Destroy(gameObject); return; }
+        if (Instance == null) { Instance = this; DontDestroyOnLoad(gameObject); }
+//        else { Destroy(this.gameObject); return; }
 
         PauseMenu = inputActions.FindAction("UI/Pause");
         PauseMenu.performed += context => PauseEsc();

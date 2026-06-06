@@ -54,7 +54,7 @@ public class CGMSpawner : MonoBehaviour
         StopAllCoroutines();
         tree.transform.Find("Tree destroy ptcl").GetComponent<ParticleSystem>().Play();
         LosePanel.SetActive(true);
-        audioSource.Stop();
+        audioSource.VolumeTo(0f, 1.5f);
     }
 
     public IEnumerator SpawnEnemy()

@@ -1,4 +1,11 @@
 
+v2.1.0
++ Animations are back! fix UI and enemies animations
++ Fix track picking bugs on both android and windows
++ Fix UI click sfx
++ Fix mods are not load on windows
++ Fix Lerping bugs ---
+
 v2.0.0-beta
 + Remake game completely. Tree Of Life is now open source and available on github.
 + Remove old changelogs

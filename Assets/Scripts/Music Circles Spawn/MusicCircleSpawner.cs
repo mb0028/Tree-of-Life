@@ -138,8 +138,8 @@ public class MusicCircleSpawner : MonoBehaviour
     
     public void Lose()
     {
-        audioSource.volume = 0;
-        audioSource.Stop();
+        audioSource.VolumeTo(0f, 1.5f);
+        //audioSource.Stop();
         IsStarted = false;
         uiButtons.Instance.GameOverpanel();
     }

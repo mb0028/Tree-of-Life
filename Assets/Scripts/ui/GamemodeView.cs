@@ -10,14 +10,16 @@ public class GamemodeView : MonoBehaviour
 
     async void Awake()
     {
-        using AndroidJavaClass mbJava = new("com.mb28.treeoflife.MBJava");
-        if (mbJava.CallStatic<bool>("canManageMedia") == false)
+        if (Application.platform == RuntimePlatform.Android)
         {
-            var activity = AndroidApplication.currentActivity;
-            //mbJava.CallStatic("ShowToast", activity, "Tree of Life needs all files access for modding and reading audio files");
-            mbJava.CallStatic("GoToAllFilesAccess", activity);
-            Application.Quit();
-            return;
+            using AndroidJavaClass mbJava = new("com.mb28.treeoflife.MBJava");
+            if (mbJava.CallStatic<bool>("canManageMedia") == false)
+            {
+                var activity = AndroidApplication.currentActivity;
+                mbJava.CallStatic("GoToAllFilesAccess", activity);
+                Application.Quit();
+                return;
+            }
         }
 
         try {

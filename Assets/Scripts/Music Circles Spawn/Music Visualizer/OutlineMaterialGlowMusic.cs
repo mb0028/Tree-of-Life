@@ -7,6 +7,7 @@ public class OutlineMaterialGlowMusic : MonoBehaviour
 {
     private int roundnessAndroid = 0;
     private Material imageMat;
+    private int alphaID = Shader.PropertyToID("_Alpha");
 
     void Awake()
     {
@@ -20,12 +21,12 @@ public class OutlineMaterialGlowMusic : MonoBehaviour
         else
             imageMat.SetFloat("_Roundness", 0f);
 
-        imageMat.SetFloat("_Alpha", 0);
+        imageMat.SetFloat(alphaID, 0);
     }
 
     void Update()
     {
         if (MusicCircleSpawner.Instance.IsStarted)
-            imageMat.SetFloat("_Alpha", Mathf.Clamp01(AudioPeer.audioBandBuffer[3] - 0.3f));            
+            imageMat.SetFloat(alphaID, Mathf.Clamp01(AudioPeer.audioBandBuffer[3] - 0.3f));            
     }
 }
